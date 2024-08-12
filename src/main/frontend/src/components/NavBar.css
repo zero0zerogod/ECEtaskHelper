@@ -1,0 +1,126 @@
+/* src/main/frontend/src/components/NavBar.css */
+
+.navbar {
+    width: 250px; /* NavBar의 기본 너비 */
+    background-color: #282c34; /* NavBar의 배경색 */
+    color: white; /* 텍스트 색상 */
+    height: 100vh; /* 화면 전체 높이 */
+    display: flex; /* Flexbox 레이아웃을 사용하여 요소를 정렬 */
+    flex-direction: column; /* 요소를 세로 방향으로 정렬 */
+    align-items: center; /* 요소를 수평으로 중앙 정렬 */
+    padding-top: 20px; /* 위쪽 패딩 */
+    position: fixed; /* 화면에 고정된 위치 */
+    top: 0; /* 화면의 상단에 위치 */
+    left: 0; /* 화면의 왼쪽에 위치 */
+    transition: width 0.3s ease; /* 너비 변경 시 부드러운 애니메이션 적용 */
+}
+
+/* NavBar가 닫혔을 때의 스타일 설정 */
+.navbar.closed {
+    width: 65px; /* 닫힌 상태에서의 NavBar 너비 */
+}
+
+/* NavBar 상단 헤더의 스타일 설정 */
+.navbar-header {
+    display: flex; /* Flexbox 레이아웃 사용 */
+    justify-content: flex-end; /* 요소를 오른쪽 끝에 정렬 */
+    width: 100%; /* 헤더의 너비를 NavBar 전체로 설정 */
+    transition: justify-content 0.3s; /* 정렬 방식 변경 시 부드러운 애니메이션 적용 */
+    padding-bottom: 10px; /* 아래쪽 패딩 */
+}
+
+/* NavBar가 닫혔을 때 헤더의 스타일 변경 */
+.navbar.closed .navbar-header {
+    justify-content: center; /* 닫힌 상태에서는 헤더 요소를 중앙 정렬 */
+}
+
+/* 햄버거 아이콘의 스타일 설정 */
+.hamburger-icon {
+    font-size: 24px; /* 아이콘 크기 */
+    cursor: pointer; /* 마우스 커서를 포인터로 변경 */
+    transition: font-size 0.3s, left 0.3s; /* 크기 및 위치 변경 시 부드러운 애니메이션 적용 */
+    position: relative; /* 상대 위치 설정 */
+}
+
+/* NavBar가 열렸을 때의 햄버거 아이콘 위치 조정 */
+.navbar:not(.closed) .hamburger-icon {
+    left: -10px; /* 열렸을 때 왼쪽으로 이동 */
+}
+
+/* NavBar가 닫혔을 때의 햄버거 아이콘 위치 조정 */
+.navbar.closed .hamburger-icon {
+    left: 0; /* 닫혔을 때 원래 위치로 돌아옴 */
+}
+
+/* NavBar 목록 스타일 설정 */
+.navbar-list {
+    list-style-type: none; /* 기본 목록 스타일 제거 */
+    padding: 0; /* 패딩 제거 */
+    width: 100%; /* 목록 너비를 NavBar 전체로 설정 */
+    margin: 0; /* 여백 제거 */
+}
+
+/* NavBar 항목 스타일 설정 */
+.navbar-item {
+    width: 100%; /* 항목 너비를 NavBar 전체로 설정 */
+    margin-bottom: 10px; /* 항목 간 하단 여백 */
+    display: flex; /* Flexbox 레이아웃 사용 */
+    justify-content: flex-start; /* 항목을 왼쪽에 정렬 */
+    transition: justify-content 0.3s ease; /* 정렬 방식 변경 시 부드러운 애니메이션 적용 */
+}
+
+/* NavBar가 닫혔을 때 항목의 정렬 방식 변경 */
+.navbar.closed .navbar-item {
+    justify-content: center; /* 닫힌 상태에서는 항목을 중앙 정렬 */
+}
+
+/* NavBar 링크 스타일 설정 */
+.navbar-link {
+    display: flex; /* Flexbox 레이아웃 사용 */
+    align-items: center; /* 아이콘과 텍스트를 수직으로 중앙 정렬 */
+    padding: 10px 20px; /* 내부 패딩 설정 */
+    color: white; /* 텍스트 색상 */
+    text-decoration: none; /* 텍스트 밑줄 제거 */
+    font-size: 20px; /* 텍스트 크기 */
+    width: 100%; /* 링크 너비를 NavBar 전체로 설정 */
+    box-sizing: border-box; /* 패딩과 테두리를 포함한 전체 크기 계산 */
+}
+
+/* NavBar 텍스트 스타일 설정 */
+.navbar-text {
+    margin-left: 10px; /* 텍스트와 아이콘 사이의 간격 설정 */
+    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+    transition: opacity 0.3s ease-in-out; /* 불투명도 변경 시 부드러운 애니메이션 적용 */
+    opacity: 0; /* 기본적으로 텍스트 숨김 */
+    visibility: hidden; /* 텍스트가 보이지 않도록 설정 */
+}
+
+/* NavBar가 완전히 열렸을 때 텍스트 표시 */
+.navbar.opened .navbar-text {
+    opacity: 1; /* 텍스트를 완전히 표시 */
+    visibility: visible; /* 텍스트를 보이도록 설정 */
+}
+
+/* NavBar가 닫혔을 때 텍스트 숨김 */
+.navbar.closed .navbar-text {
+    opacity: 0; /* 텍스트를 숨김 */
+    visibility: hidden; /* 텍스트가 보이지 않도록 설정 */
+}
+
+/* NavBar 링크에 마우스를 올렸을 때의 스타일 변경 */
+.navbar-link:hover {
+    background-color: #9370db; /* 배경색 변경 */
+    box-shadow: 0 4px 8px rgba(106, 77, 171, 0.8); /* 그림자 효과 추가 */
+}
+
+/* NavBar 아이콘 스타일 설정 */
+.navbar-icon {
+    font-size: 24px; /* 아이콘 크기 */
+    transition: margin-right 0.3s ease; /* 여백 변경 시 부드러운 애니메이션 적용 */
+    flex-shrink: 0; /* 아이콘 크기 유지 */
+}
+
+/* NavBar가 닫혔을 때 아이콘의 여백 변경 */
+.navbar.closed .navbar-icon {
+    margin-right: 0; /* 닫혔을 때 오른쪽 여백 제거 */
+}

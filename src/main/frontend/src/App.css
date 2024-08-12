@@ -1,0 +1,19 @@
+/* src/main/frontend/src/App.css */
+
+.App {
+  display: flex;
+}
+
+.App-content {
+  flex-grow: 1;
+  padding: 20px;
+  transition: margin-left 0.3s;
+}
+
+.App-content.navbar-open {
+  margin-left: 250px;
+}
+
+.App-content.navbar-closed {
+  margin-left: 65px;
+}

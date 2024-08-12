@@ -1,0 +1,31 @@
+/* src/main/frontend/src/pages/HomePage.css */
+
+.home-page {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.notice-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+.notice-table th,
+.notice-table td {
+    border: 1px solid #ccc;
+    border-right: none;
+    border-left: none;
+    padding: 8px;
+    text-align: center;
+}
+
+.notice-table td:nth-child(2) {
+    text-align: left;
+}
+
+.notice-table th {
+    background-color: #f4f4f4;
+}
