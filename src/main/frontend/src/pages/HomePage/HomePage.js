@@ -16,6 +16,7 @@ function HomePage() {
 
     // 환경 변수에서 서버 URL을 가져옴
     const serverUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:8080';
+    console.log("serverUrl: ", serverUrl); // 디버깅로그
 
     console.log("HomePage UserInfo: ", userInfo); // 디버깅 로그 추가
 
