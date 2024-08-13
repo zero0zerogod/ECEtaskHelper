@@ -6,6 +6,9 @@ import axios from 'axios';
 const AuthContext = createContext(undefined);
 
 export const AuthProvider = ({children}) => {
+    // 환경 변수에서 서버 URL을 가져옴
+    const serverUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:8080';
+
     const [userInfo, setUserInfo] = useState(null);
 
     // 새로고침 없이 바로 로그인 정보 반영하기 위해 추가
@@ -16,7 +19,7 @@ export const AuthProvider = ({children}) => {
     // 사용자 정보를 가져오는 함수
     const fetchUserInfo = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/oauth/user-info');
+            const response = await axios.get(`${serverUrl}/oauth/user-info`);
             setUserInfo(response.data);
             console.log("UserInfo updated: ", response.data); // 디버깅 로그 추가
         } catch (error) {
@@ -32,7 +35,7 @@ export const AuthProvider = ({children}) => {
 
     const logout = async () => {
         try {
-            await axios.get('http://localhost:8080/oauth/logout');
+            await axios.get(`${serverUrl}/oauth/logout`);
             setUserInfo(null);
             alert("로그아웃되었습니다.");
         } catch (error) {
