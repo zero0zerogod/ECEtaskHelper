@@ -42,6 +42,7 @@
     ]
   },
   "devDependencies": {
+    "babel-plugin-transform-remove-console": "^6.9.4",
     "clean-webpack-plugin": "^4.0.0"
   }
 }
