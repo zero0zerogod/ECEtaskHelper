@@ -5,10 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.ArrayList;
-
 @Getter
 @NoArgsConstructor
 @Entity
@@ -42,10 +38,4 @@ public class Subject {
     @Column(name = "location", nullable = false)
     private String location;
 
-    public List<String> getTimes() {
-        if (time == null || time.isEmpty()) {
-            return new ArrayList<>();
-        }
-        return Arrays.asList(time.split(", "));
-    }
 }
