@@ -11,7 +11,7 @@ function HomePage() {
     const location = useLocation();
     const navigate = useNavigate();
 
-    // 공지사항 상태 정의
+    // 공지사항 데이터를 저장할 상태 변수 정의
     const [notices, setNotices] = useState([]);
 
     // 환경 변수에서 서버 URL을 가져옴
@@ -32,9 +32,9 @@ function HomePage() {
         }
     }, [location]);
 
+    // 컴포넌트가 마운트될 때 공지사항 데이터를 서버로부터 가져오는 함수 호출
     useEffect(() => {
-        // 공지사항 데이터 가져오기
-        fetchNotices().then(r => {});
+        fetchNotices().then(r => {}); // 공지사항 데이터를 가져오는 함수 호출
     });
 
     const handleOAuthLogin = async (oauthProvider, code) => {
@@ -50,12 +50,14 @@ function HomePage() {
         }
     };
 
-    // 공지사항 데이터 가져오는 함수
+    // 공지사항 데이터를 서버에서 가져오는 함수
     const fetchNotices = async () => {
         try {
+            // 서버의 API 엔드포인트에 GET 요청을 보내 공지사항 데이터를 가져옴
             const response = await axios.get(`${serverUrl}/api/notices`);
-            setNotices(response.data);
+            setNotices(response.data); // 가져온 데이터를 상태에 저장
         } catch (error) {
+            // 데이터 가져오는 중 오류 발생 시 처리
             console.error("공지사항 조회 중 오류 발생:", error);
         }
     };
@@ -72,6 +74,7 @@ function HomePage() {
                 </tr>
                 </thead>
                 <tbody>
+                {/* notices 배열을 순회하여 각 공지사항을 테이블 행으로 렌더링 */}
                 {notices.map((notice, index) => (
                     <tr key={index}>
                         <td>{notice.category}</td>
