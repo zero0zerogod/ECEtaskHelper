@@ -32,7 +32,6 @@ dependencies {
 
     compileOnly 'org.projectlombok:lombok'
 
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
     runtimeOnly 'com.mysql:mysql-connector-j'
 
@@ -73,6 +72,10 @@ sourceSets {
 
 processResources { dependsOn "copyReactBuildFiles" }
 
+tasks.register('cleanResources', Delete) {
+    delete "$projectDir/src/main/resources/static"
+}
+
 tasks.register('installReact', Exec) {
     workingDir "$frontendDir"
     inputs.dir "$frontendDir"
@@ -98,6 +101,7 @@ tasks.register('buildReact', Exec) {
 }
 
 tasks.register('copyReactBuildFiles', Copy) {
+    dependsOn "cleanResources"
     dependsOn "buildReact"
     from "$frontendDir/build"
     into "$projectDir/src/main/resources/static"
