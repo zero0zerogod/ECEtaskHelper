@@ -35,7 +35,7 @@ function HomePage() {
     // 컴포넌트가 마운트될 때 공지사항 데이터를 서버로부터 가져오는 함수 호출
     useEffect(() => {
         fetchNotices().then(r => {}); // 공지사항 데이터를 가져오는 함수 호출
-    });
+    }, []);
 
     const handleOAuthLogin = async (oauthProvider, code) => {
         try {
