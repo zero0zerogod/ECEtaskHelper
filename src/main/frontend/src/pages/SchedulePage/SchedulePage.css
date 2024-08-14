@@ -42,7 +42,8 @@ input, button {
 
 .subjects-table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
     table-layout: auto; /* 열 너비를 텍스트 내용에 따라 유동적으로 변경 */
 }
 
@@ -72,9 +73,10 @@ input, button {
     white-space: nowrap; /* 텍스트 줄바꿈 방지 */
 }
 
-.subjects-table th,
-.selected-subjects-table th {
+.subjects-table th {
     background-color: #f4f4f4;
+    border-top: 2px solid #000000;
+    border-bottom: 2px solid #000000;
     position: sticky; /* 헤더를 고정 */
     top: 0; /* 상단에 고정 */
     z-index: 2; /* 다른 내용 위에 고정되도록 설정 */
