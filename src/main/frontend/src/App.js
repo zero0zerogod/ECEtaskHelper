@@ -13,15 +13,15 @@ import NavBar from './components/NavBar';
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
 
-// 배포 환경에서 console.log, console.warn 지우기
-if (process.env.NODE_ENV === "production") {
-    console = window.console || {};
-    console.log = function no_console() {};
-    console.warn = function no_console() {};
-    console.error = function () {};
-}
-
 function App() {
+    // 배포 환경에서 console.log, console.warn 지우기
+    if (process.env.NODE_ENV === "production") {
+        console = window.console || {};
+        console.log = function no_console() {};
+        console.warn = function no_console() {};
+        console.error = function () {};
+    }
+
     const [isNavBarOpen, setIsNavBarOpen] = useState(true);
 
     const toggleNavBar = () => {
