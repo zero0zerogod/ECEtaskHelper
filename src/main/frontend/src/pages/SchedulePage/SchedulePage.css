@@ -25,14 +25,13 @@
     display: block; /* 강제로 block 처리 */
     align-self: flex-start; /* 자신만 위쪽에 정렬 */
     position: sticky; /* 스크롤할 때 화면에 고정 */
-    top: 20px; /* top 위치를 지정하여 페이지 상단에서부터의 거리를 설정 */
+    top: 40px; /* top 위치를 지정하여 페이지 상단에서부터의 거리를 설정 */
     overflow: auto; /* 내용이 넘칠 경우 스크롤 가능하도록 설정 */
 }
 
-.search-input {
-    width: 40%;
-    padding: 5px;
-    font-size: 12px; /* 텍스트 크기를 줄임 */
+input, button {
+    height: 22px;
+    box-sizing: border-box;
 }
 
 .subjects-table-container {

@@ -1,19 +1,19 @@
 // src/main/frontend/src/pages/SchedulePage.js
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import './SchedulePage.css'; // CSS 파일을 import
-import { useAuth } from '../../context/AuthContext';
+import {useAuth} from '../../context/AuthContext';
 import {
-    handleSearch,
-    handleInputChange,
-    handleSelectSubject,
     handleCheckboxChange,
-    handleDeleteSubject
+    handleDeleteSubject,
+    handleInputChange,
+    handleSearch,
+    handleSelectSubject
 } from './utils/scheduleHandlers'; // 핸들러 import
-import { getUserSchedule } from './utils/scheduleAPI';
+import {getUserSchedule} from './utils/scheduleAPI';
 import ScheduleTable from "./components/ScheduleTable";
 
 function SchedulePage() {
-    const { userInfo } = useAuth();
+    const {userInfo} = useAuth();
     const [subjects, setSubjects] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedSchedules, setSelectedSchedules] = useState([]);
@@ -28,7 +28,7 @@ function SchedulePage() {
 
     // 과목명 기준으로 선택된 과목들을 그룹화
     const groupedSubjects = selectedSchedules.reduce((groups, schedule) => {
-        const { subjectName } = schedule.subject;
+        const {subjectName} = schedule.subject;
         if (!groups[subjectName]) {
             groups[subjectName] = [];
         }
@@ -38,7 +38,6 @@ function SchedulePage() {
 
     return (
         <div className="schedule-page">
-            <h1>시간표 구성</h1>
             <div className="page-layout">
                 <div className="left-section">
                     <input
@@ -48,9 +47,15 @@ function SchedulePage() {
                         placeholder="과목명을 검색하세요"
                         value={searchTerm}
                         onChange={(event) => handleInputChange(event, setSearchTerm)}
-                        className="search-input"
+                        style={{
+                            width: '40%',
+                            fontSize: '12px',
+                            verticalAlign: 'middle',
+                            outline: 'none'
+                        }}
                     />
-                    <button onClick={() => handleSearch(searchTerm, setSubjects)} className="search-button">검색</button> {/* 검색 버튼 추가 */}
+                    <button onClick={() => handleSearch(searchTerm, setSubjects)} style={{width: '45px', verticalAlign: 'middle', outline: 'none'}}>검색</button>
+                    {/* 검색 버튼 추가 */}
                     <div className="subjects-table-container">
                         <table className="subjects-table">
                             <thead>
@@ -72,7 +77,9 @@ function SchedulePage() {
                                     <td>{subject.time}</td>
                                     <td>{subject.location}</td>
                                     <td>
-                                        <button onClick={() => handleSelectSubject(subject, selectedSchedules, setSelectedSchedules)}>담기</button>
+                                        <button
+                                            onClick={() => handleSelectSubject(subject, selectedSchedules, setSelectedSchedules)}>담기
+                                        </button>
                                     </td>
                                 </tr>
                             ))}
@@ -125,7 +132,7 @@ function SchedulePage() {
                     )}
                 </div>
                 <div className="right-section">
-                    <ScheduleTable schedules={selectedSchedules} /> {/* 시간표 컴포넌트를 추가 */}
+                    <ScheduleTable schedules={selectedSchedules}/> {/* 시간표 컴포넌트를 추가 */}
                 </div>
             </div>
         </div>
