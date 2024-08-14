@@ -43,6 +43,8 @@ function SchedulePage() {
                 <div className="left-section">
                     <input
                         type="text"
+                        id="searchSubject"
+                        name="searchSubject"
                         placeholder="과목명을 검색하세요"
                         value={searchTerm}
                         onChange={(event) => handleInputChange(event, setSearchTerm)}
@@ -104,6 +106,8 @@ function SchedulePage() {
                                                 <td>
                                                     <input
                                                         type="checkbox"
+                                                        id={`scheduleCheckbox-${schedule.id}`}
+                                                        name={`scheduleCheckbox-${schedule.id}`}
                                                         checked={schedule.selected}
                                                         onChange={(e) => handleCheckboxChange(schedule.id, e.target.checked, setSelectedSchedules, groupedSubjects, subjectName)}
                                                     />
