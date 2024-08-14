@@ -1,5 +1,6 @@
 package zerogod.ecetaskhelper.controller;
 
+import org.springframework.cache.annotation.Cacheable;
 import zerogod.ecetaskhelper.model.Notice;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -14,7 +15,7 @@ import java.util.List;
 
 @RestController
 public class NoticeController {
-
+    @Cacheable("notices")
     @GetMapping("/api/notices")
     public List<Notice> getNotices() throws IOException {
         // 스크래핑할 URL

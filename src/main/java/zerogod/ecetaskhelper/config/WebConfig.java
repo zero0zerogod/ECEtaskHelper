@@ -1,5 +1,6 @@
 package zerogod.ecetaskhelper.config;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
@@ -41,13 +42,13 @@ public class WebConfig implements WebMvcConfigurer {
             }
 
             @Override
-            public void init(FilterConfig filterConfig) throws ServletException {
-                // 초기화 코드가 필요할 경우 여기에 추가
+            public void init(FilterConfig filterConfig) {
+                // 초기화 코드가 필요할 경우 추가
             }
 
             @Override
             public void destroy() {
-                // 자원 정리가 필요할 경우 여기에 추가
+                // 자원 정리가 필요할 경우 추가
             }
         };
     }
@@ -58,19 +59,27 @@ public class WebConfig implements WebMvcConfigurer {
             @Override
             public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
                 if (response instanceof HttpServletResponse httpServletResponse) {
-                    httpServletResponse.setHeader("Cache-Control", "max-age=3600, must-revalidate");
-                }
-                chain.doFilter(request, response);
-            }
+                    HttpServletRequest httpRequest = (HttpServletRequest) request;
 
-            @Override
+                    if (httpRequest.getRequestURI().startsWith("/oauth")) {
+                        httpServletResponse.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
+                    } else if (httpRequest.getRequestURI().startsWith("/api/schedule")) {
+                        httpServletResponse.setHeader("Cache-Control", "no-store");
+                    } else {
+                        httpServletResponse.setHeader("Cache-Control", "max-age=3600, public");
+                    }
+            }
+                chain.doFilter(request, response);
+}
+
+                @Override
             public void init(FilterConfig filterConfig) throws ServletException {
-                // 초기화 코드가 필요할 경우 여기에 추가
+                // 초기화 코드가 필요할 경우 추가
             }
 
             @Override
             public void destroy() {
-                // 자원 정리가 필요할 경우 여기에 추가
+                // 자원 정리가 필요할 경우 추가
             }
         };
     }
@@ -87,13 +96,13 @@ public class WebConfig implements WebMvcConfigurer {
             }
 
             @Override
-            public void init(FilterConfig filterConfig) throws ServletException {
-                // 초기화 코드가 필요할 경우 여기에 추가
+            public void init(FilterConfig filterConfig) {
+                // 초기화 코드가 필요할 경우 추가
             }
 
             @Override
             public void destroy() {
-                // 자원 정리가 필요할 경우 여기에 추가
+                // 자원 정리가 필요할 경우 추가
             }
         };
     }

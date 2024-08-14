@@ -1,5 +1,6 @@
 package zerogod.ecetaskhelper.controller;
 
+import org.springframework.cache.annotation.Cacheable;
 import zerogod.ecetaskhelper.service.SubjectService;
 import zerogod.ecetaskhelper.model.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ public class SubjectController {
 
     // 모든 과목(Subject) 정보를 조회하는 엔드포인트
     @GetMapping
+    @Cacheable("subjects")
     public List<Subject> getAllSubjects() {
         return subjectService.findAll();
     }
