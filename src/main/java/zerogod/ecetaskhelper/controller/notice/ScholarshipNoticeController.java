@@ -13,11 +13,9 @@ import java.util.List;
 public class ScholarshipNoticeController extends NoticeScraper {
     private static final String URL = "https://www.ajou.ac.kr/kr/ajou/notice_scholarship.do";
 
-    private final NoticeScraper noticeScraper = new NoticeScraper();
-
     @Cacheable("scholarshipNotices")
     @GetMapping("/api/scholarship-notices")
     public List<Notice> getGeneralNotices() throws IOException {
-        return noticeScraper.scrapeNotices(URL);
+        return scrapeNotices(URL);
     }
 }
