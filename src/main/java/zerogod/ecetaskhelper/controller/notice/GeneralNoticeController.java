@@ -13,11 +13,10 @@ import java.util.List;
 public class GeneralNoticeController extends NoticeScraper {
     private static final String URL = "https://www.ajou.ac.kr/kr/ajou/notice.do";
 
-    private final NoticeScraper noticeScraper = new NoticeScraper();
 
     @Cacheable("generalNotices")
     @GetMapping("/api/general-notices")
     public List<Notice> getGeneralNotices() throws IOException {
-        return noticeScraper.scrapeNotices(URL);
+        return scrapeNotices(URL);
     }
 }
