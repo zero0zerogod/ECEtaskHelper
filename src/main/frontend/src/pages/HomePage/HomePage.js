@@ -26,7 +26,6 @@ function HomePage() {
 
         if (code) {
             handleOAuthLogin(oauthProvider, code).then(() => {
-                fetchUserInfo(); // 로그인 후 사용자 정보 업데이트
             });
         }
     }, [location]);
@@ -37,11 +36,13 @@ function HomePage() {
         fetchNotices('scholarship-notices', setScholarshipNotices).then(r => {});
         fetchNotices('department-notices', setDepartmentNotices).then(r => {});
     }, []);
+
     const handleOAuthLogin = async (oauthProvider, code) => {
         try {
-            const response = await axios.get(`${serverUrl}/oauth/login/${oauthProvider}?code=${code}`);
+            await axios.get(`${serverUrl}/oauth/login/${oauthProvider}?code=${code}`);
+            fetchUserInfo(); // 로그인 후 사용자 정보 업데이트
             navigate("/home", { replace: true }); // URL을 /home으로 변경
-            alert("로그인되었습니다.");
+            alert(`${userInfo.nickname}님, 환영합니다.`);
 
         } catch (error) {
             console.error("로그인 또는 사용자 정보 조회 중 오류 발생:", error);
