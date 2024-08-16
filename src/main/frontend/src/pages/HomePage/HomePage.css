@@ -7,10 +7,20 @@
     padding: 20px;
 }
 
+.table-name {
+    background-color: #007bff; /* 배경색 설정 */
+    color: white; /* 텍스트 색상 설정 */
+    padding: 5px 10px; /* 텍스트 주변에 여백 추가 */
+    display: inline-block; /* 박스 크기를 텍스트 크기에 맞추기 */
+    font-weight: bold; /* 텍스트를 굵게 표시 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+}
+
 .notice-table {
     width: 100%;
     border-collapse: collapse;
     font-size: 12px;
+    margin-bottom: 20px;
 }
 
 .notice-table th,
