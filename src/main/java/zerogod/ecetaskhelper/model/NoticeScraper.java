@@ -9,9 +9,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class NoticeScraper {
-    public List<Notice> scrapeNotices(String url) throws IOException {
+    public List<Notice> scrapeNotices(String url, Comparator<Notice> comparator) throws IOException {
         // Jsoup으로 URL에서 HTML 문서를 가져옴
         Document doc = Jsoup.connect(url).get();
 
@@ -36,17 +37,18 @@ public class NoticeScraper {
             }
         }
 
+        Stream<Notice> noticeStream = notices.stream();
+
+        if (comparator != null)
+            noticeStream = noticeStream.sorted(comparator);
+
         // 공지사항의 수가 5개를 초과할 경우, 상위 5개만 선택
         if (notices.size() > 5) {
-            return notices.stream()
-                    .sorted(Comparator.comparing(Notice::date).reversed())
+            return noticeStream
                     .limit(5)
                     .toList();
-        } else {
-            // 그렇지 않으면 모든 공지사항을 반환
-            return notices.stream()
-                    .sorted(Comparator.comparing(Notice::date).reversed())
-                    .toList();
         }
+        else
+            return noticeStream.toList();
     }
 }
