@@ -42,7 +42,7 @@ function HomePage() {
             await axios.get(`${serverUrl}/oauth/login/${oauthProvider}?code=${code}`);
             fetchUserInfo(); // 로그인 후 사용자 정보 업데이트
             navigate("/home", { replace: true }); // URL을 /home으로 변경
-            alert(`${userInfo.nickname}님, 환영합니다.`);
+            alert(`로그인 성공`);
 
         } catch (error) {
             console.error("로그인 또는 사용자 정보 조회 중 오류 발생:", error);
