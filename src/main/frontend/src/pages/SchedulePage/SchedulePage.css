@@ -71,17 +71,19 @@ input, button {
     text-align: center;
     font-size: 12px; /* 글자 크기를 줄임 */
     white-space: nowrap; /* 텍스트 줄바꿈 방지 */
-    height: auto;
 }
 
 .subjects-table th,
 .selected-subjects-table th {
     background-color: #f4f4f4;
-    border-top: 2px solid #000000;
-    border-bottom: 2px solid #000000;
     position: sticky; /* 헤더를 고정 */
     top: 0; /* 상단에 고정 */
     z-index: 2; /* 다른 내용 위에 고정되도록 설정 */
+}
+
+.subjects-table th {
+    border-top: 2px solid #000000;
+    border-bottom: 2px solid #000000;
 }
 
 .subjects-table tbody tr:nth-child(odd),
