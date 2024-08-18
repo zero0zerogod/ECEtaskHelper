@@ -40,8 +40,9 @@ function HomePage() {
     const handleOAuthLogin = async (oauthProvider, code) => {
         try {
             await axios.get(`${serverUrl}/oauth/login/${oauthProvider}?code=${code}`);
-            fetchUserInfo(); // 로그인 후 사용자 정보 업데이트
             navigate("/home", { replace: true }); // URL을 /home으로 변경
+            fetchUserInfo(); // 로그인 후 사용자 정보 업데이트
+            console.log({userInfo}.nickname);
             alert(`로그인 성공`);
 
         } catch (error) {
@@ -55,6 +56,7 @@ function HomePage() {
         try {
             const response = await axios.get(`${serverUrl}/api/${endpoint}`);
             setNotices(response.data);
+            console.log("scraping succeeded")
         } catch (error) {
             console.error(`${endpoint} 조회 중 오류 발생:`, error);
         }
