@@ -17,6 +17,6 @@ public class DepartmentNoticeController extends NoticeScraper {
     @Cacheable("departmentNotices")
     @GetMapping("/api/department-notices")
     public List<Notice> getGeneralNotices() throws IOException {
-        return scrapeNotices(URL, Comparator.comparing(Notice::date));
+        return scrapeNotices(URL);
     }
 }

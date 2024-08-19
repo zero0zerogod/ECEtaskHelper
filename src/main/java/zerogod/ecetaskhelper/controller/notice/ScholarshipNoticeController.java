@@ -17,6 +17,6 @@ public class ScholarshipNoticeController extends NoticeScraper {
     @Cacheable("scholarshipNotices")
     @GetMapping("/api/scholarship-notices")
     public List<Notice> getGeneralNotices() throws IOException {
-        return scrapeNotices(URL, Comparator.comparing(Notice::date).reversed());
+        return scrapeNotices(URL);
     }
 }
