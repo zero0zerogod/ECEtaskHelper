@@ -1,35 +1,81 @@
 // src/main/frontend/src/pages/HomePage/components/NoticeTable.js
 
+import React, { useState } from 'react';
+import './NoticeTable.css';
+
 function NoticeTable({ title, notices }) {
+    const [isExpanded, setIsExpanded] = useState(false);
+
+    const displayedNotices = isExpanded ? notices : notices.slice(0, 5);
+    const shouldShowToggle = notices.length > 5;
+
+    // 각 열의 너비를 지정하는 스타일 객체
+    const columnStyles = {
+        number: { width: '5%' },
+        category: { width: '7%' },
+        title: { width: '60%' },
+        department: { width: '13%' },
+        date: { width: '7%' },
+    };
+
     return (
-        <>
+        <div className="notice-table-container">
             <div className="table-name">{title}</div>
             <table className="notice-table">
                 <thead>
                 <tr>
-                    <th>분류</th>
-                    <th>제목</th>
-                    <th>공지부서</th>
-                    <th>작성일</th>
+                    <th style={columnStyles.number}>번호</th>
+                    <th style={columnStyles.category}>분류</th>
+                    <th style={columnStyles.title}>제목</th>
+                    <th style={columnStyles.department}>공지부서</th>
+                    <th style={columnStyles.date}>작성일</th>
+                    <th></th> {/* 6번째 열 추가 */}
                 </tr>
                 </thead>
                 <tbody>
-                {notices.map((notice, index) => (
+                {displayedNotices.map((notice, index) => (
                     <tr key={index}>
-                        <td>{notice.category}</td>
-                        <td>
+                        <td style={columnStyles.number}>
+                            {notice.number === "공지" ? (
+                                <span style={
+                                    {color: 'white',
+                                    fontWeight: 'bold',
+                                    backgroundColor: '#007bff',
+                                    padding: '3px 5px',
+                                        borderRadius: '4px'
+                                }}>
+                                        {notice.number}
+                                    </span>
+                            ) : (
+                                notice.number
+                            )}
+                        </td>
+                        <td style={columnStyles.category}>{notice.category}</td>
+                        <td style={columnStyles.title} className="notice-title">
                             <a href={notice.link} target="_blank" rel="noopener noreferrer">
                                 {notice.title}
                             </a>
                         </td>
-                        <td>{notice.department}</td>
-                        <td>{notice.date}</td>
+                        <td style={columnStyles.department}>{notice.department}</td>
+                        <td style={columnStyles.date}>{notice.date}</td>
+                        {index === 4 && shouldShowToggle ? (
+                            <td className="toggle-button-cell">
+                                <button
+                                    className="toggle-button"
+                                    onClick={() => setIsExpanded(!isExpanded)}
+                                >
+                                    {isExpanded ? '접기 ▲' : '펼치기 ▼'}
+                                </button>
+                            </td>
+                        ) : (
+                            <td></td> // 나머지 행에서는 빈 셀로 유지
+                        )}
                     </tr>
                 ))}
                 </tbody>
             </table>
-        </>
+        </div>
     );
 }
 
-export default NoticeTable
+export default NoticeTable;

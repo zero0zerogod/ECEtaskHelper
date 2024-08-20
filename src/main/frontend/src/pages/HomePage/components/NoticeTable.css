@@ -1,0 +1,65 @@
+/* src/main/frontend/src/pages/HomePage/components/NoticeTable.css */
+
+.notice-table-container {
+    margin-bottom: 30px;
+}
+
+.table-name {
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    display: inline-block;
+    font-weight: bold;
+    text-align: center;
+}
+
+.notice-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+.notice-table th,
+.notice-table td {
+    border: 1px solid #ccc;
+    border-right: none;
+    border-left: none;
+    padding: 6px;
+    text-align: center;
+}
+
+.notice-table td:nth-child(3) {
+    text-align: left;
+}
+
+.notice-title a {
+    text-decoration: none;
+}
+
+.notice-title a:hover {
+    text-decoration: underline;
+}
+
+.notice-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.toggle-button-cell {
+    text-align: right; /* 버튼을 셀 오른쪽에 정렬 */
+    padding: 0;
+    margin: 0;
+}
+
+.toggle-button {
+    border: none;
+    display: inline-block;
+    font-size: 11px;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-button:hover {
+    filter: brightness(0.9);
+}

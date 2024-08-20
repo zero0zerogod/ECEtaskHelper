@@ -28,7 +28,7 @@ public class NoticeScraper {
     }
 
     private void addNotices(List<Notice> notices, Elements rows, String url, boolean isFixed) {
-        int limit = isFixed ? rows.size() : Math.min(rows.size(), 5);
+        int limit = isFixed ? rows.size() : 6;
 
         for (int i = 0; i < limit; i++) {
             Element row = rows.get(i);

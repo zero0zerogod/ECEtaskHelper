@@ -13,38 +13,42 @@ function HomePage() {
     const location = useLocation();
     const navigate = useNavigate();
 
-    // 공지사항 데이터를 저장할 상태 변수 정의
-    const [generalNotices, setGeneralNotices] = useState([]);
-    const [scholarshipNotices, setScholarshipNotices] = useState([]);
-    const [departmentNotices, setDepartmentNotices] = useState([]);
+    const [notices, setNotices] = useState({
+        general: [],
+        scholarship: [],
+        department: []
+    });
 
-    // OAuth 리디렉션 처리
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
         const code = searchParams.get('code');
-        const oauthProvider = location.pathname.split('/').pop(); // URL 경로에서 OAuth 제공자 정보 추출
+        const oauthProvider = location.pathname.split('/').pop();
 
         if (code) {
             handleOAuthLogin(oauthProvider, code).then(() => {
+                // handleOAuthLogin 성공 후 추가 작업이 필요하다면 여기에 작성
+            }).catch((error) => {
+                console.error('Error during OAuth login:', error);
             });
         }
     }, [location]);
 
-    // 컴포넌트가 마운트될 때 공지사항 데이터를 서버로부터 가져오는 함수 호출
     useEffect(() => {
-        fetchNotices('general-notices', setGeneralNotices).then(r => {});
-        fetchNotices('scholarship-notices', setScholarshipNotices).then(r => {});
-        fetchNotices('department-notices', setDepartmentNotices).then(r => {});
+        fetchAllNotices().then(() => {
+            // fetchAllNotices 성공 후 추가 작업이 필요하다면 여기에 작성
+        }).catch((error) => {
+            console.error('Error fetching notices:', error);
+        });
     }, []);
+
 
     const handleOAuthLogin = async (oauthProvider, code) => {
         try {
             await axios.get(`${serverUrl}/oauth/login/${oauthProvider}?code=${code}`);
-            navigate("/home", { replace: true }); // URL을 /home으로 변경
-            fetchUserInfo(); // 로그인 후 사용자 정보 업데이트
-            console.log({userInfo}.nickname);
+            await fetchUserInfo();
+            console.log(userInfo?.nickname); // fetchUserInfo 후에 userInfo 사용
             alert(`로그인 성공`);
-
+            navigate("/home", { replace: true });
         } catch (error) {
             console.error("로그인 또는 사용자 정보 조회 중 오류 발생:", error);
             alert("로그인 실패");
@@ -52,21 +56,36 @@ function HomePage() {
         }
     };
 
-    const fetchNotices = async (endpoint, setNotices) => {
+    const fetchAllNotices = async () => {
         try {
-            const response = await axios.get(`${serverUrl}/api/${endpoint}`);
-            setNotices(response.data);
-            console.log("scraping succeeded")
+            const [general, scholarship, department] = await Promise.all([
+                fetchNotices('general-notices'),
+                fetchNotices('scholarship-notices'),
+                fetchNotices('department-notices')
+            ]);
+
+            setNotices({
+                general,
+                scholarship,
+                department
+            });
+
+            console.log("모든 공지사항 데이터를 성공적으로 가져왔습니다.");
         } catch (error) {
-            console.error(`${endpoint} 조회 중 오류 발생:`, error);
+            console.error("공지사항 조회 중 오류 발생:", error);
         }
+    };
+
+    const fetchNotices = async (endpoint) => {
+        const response = await axios.get(`${serverUrl}/api/${endpoint}`);
+        return response.data;
     };
 
     return (
         <div className="home-page">
-            <NoticeTable title="일반공지" notices={generalNotices} />
-            <NoticeTable title="장학공지" notices={scholarshipNotices} />
-            <NoticeTable title="전자공학과 공지" notices={departmentNotices} />
+            <NoticeTable title="일반공지" notices={notices.general} />
+            <NoticeTable title="장학공지" notices={notices.scholarship} />
+            <NoticeTable title="전자공학과 공지" notices={notices.department} />
         </div>
     );
 }
