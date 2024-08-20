@@ -18,6 +18,6 @@ public class GeneralNoticeController extends NoticeScraper {
     @Cacheable("generalNotices")
     @GetMapping("/api/general-notices")
     public List<Notice> getGeneralNotices() throws IOException {
-        return scrapeNotices(URL, Comparator.comparing(Notice::date).reversed());
+        return scrapeNotices(URL);
     }
 }
