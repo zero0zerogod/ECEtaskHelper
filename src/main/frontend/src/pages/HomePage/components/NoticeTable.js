@@ -5,6 +5,7 @@ import './NoticeTable.css';
 
 function NoticeTable({ title, notices }) {
     const [isExpanded, setIsExpanded] = useState(false);
+    const dateColumnTitle = title.includes("학과") ? "공지 마감일" : "작성일";
 
     const displayedNotices = isExpanded ? notices : notices.slice(0, 5);
     const shouldShowToggle = notices.length > 5;
@@ -12,10 +13,11 @@ function NoticeTable({ title, notices }) {
     // 각 열의 너비를 지정하는 스타일 객체
     const columnStyles = {
         number: { width: '5%' },
-        category: { width: '7%' },
-        title: { width: '60%' },
-        department: { width: '13%' },
-        date: { width: '7%' },
+        category: { width: '10%' },
+        title: { width: '55%' },
+        department: { width: '15%' },
+        date: { width: '8%' },
+        state: { width: '7%' },
     };
 
     return (
@@ -28,8 +30,8 @@ function NoticeTable({ title, notices }) {
                     <th style={columnStyles.category}>분류</th>
                     <th style={columnStyles.title}>제목</th>
                     <th style={columnStyles.department}>공지부서</th>
-                    <th style={columnStyles.date}>작성일</th>
-                    <th></th> {/* 6번째 열 추가 */}
+                    <th style={columnStyles.date}>{dateColumnTitle}</th>
+                    <th style={columnStyles.state}></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -59,7 +61,7 @@ function NoticeTable({ title, notices }) {
                         <td style={columnStyles.department}>{notice.department}</td>
                         <td style={columnStyles.date}>{notice.date}</td>
                         {index === 4 && shouldShowToggle ? (
-                            <td className="toggle-button-cell">
+                            <td className="toggle-button-cell" style={columnStyles.state}>
                                 <button
                                     className="toggle-button"
                                     onClick={() => setIsExpanded(!isExpanded)}
