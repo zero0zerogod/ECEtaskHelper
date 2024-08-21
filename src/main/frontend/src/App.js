@@ -12,6 +12,7 @@ import LoginPage from './pages/login/loginPage';
 import NavBar from './components/NavBar';
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
+import FilePage from "./pages/file/filePage";
 
 function App() {
     // 배포 환경에서 console.log, console.warn 지우기
@@ -39,7 +40,8 @@ function App() {
                             <Route path="/" element={<HomePage />} />
                             <Route path="/home" element={<HomePage />} />
                             <Route path="/schedule" element={<PrivateRoute element={<SchedulePage />} />} />
-                            <Route path="/subjectInfo" element={<SubjectPage />} />
+                            <Route path="/file" element={<FilePage />} />
+                            <Route path="/subjects" element={<SubjectPage />} />
                             <Route path="/about" element={<AboutPage />} />
                             <Route path="/oauth/redirected/kakao" element={<HomePage />} />
                             <Route path="/oauth/redirected/naver" element={<HomePage />} />
