@@ -26,7 +26,7 @@ public class DriveController {
     @Autowired
     private Drive drive;
 
-    @Value("${google.drive.forder.id}")
+    @Value("${google.drive.folder.id}")
     private String folderId; // Google Drive 폴더 ID
 
     @PostMapping("/api/files/upload")
@@ -79,13 +79,14 @@ public class DriveController {
         FileList result = drive.files().list()
                 .setQ(query)
                 .setSpaces("drive")
-                .setFields("files(id, name, mimeType, webViewLink, webContentLink, parents)")
+                .setFields("files(id, name, mimeType, webViewLink, webContentLink, modifiedTime, size, parents)")
                 .execute();
 
         return result.getFiles().stream().map(file -> {
             boolean isFolder = "application/vnd.google-apps.folder".equals(file.getMimeType());
             String downloadLink = isFolder ? null : file.getWebContentLink();
-            return new FileItem(file.getId(), file.getName(), isFolder, downloadLink);
+            return new FileItem(file.getId(), file.getName(), isFolder, downloadLink, file.getModifiedTime().toString(), file.getMimeType(), file.getSize());
         }).collect(Collectors.toList());
     }
+
 }

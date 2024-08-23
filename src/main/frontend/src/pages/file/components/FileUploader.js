@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const FileUploader = () => {
+const FileUploader = ({ onUploadSuccess }) => {
     const [file, setFile] = useState(null);
     const [uploadStatus, setUploadStatus] = useState('');
 
@@ -26,6 +26,7 @@ const FileUploader = () => {
             if (response.ok) {
                 setUploadStatus('File uploaded successfully!');
                 setFile(null); // Clear the selected file
+                onUploadSuccess(); // 파일 업로드 성공 후 캐시 무효화 및 파일 목록 새로고침
             } else {
                 setUploadStatus('File upload failed. Please try again.');
             }
