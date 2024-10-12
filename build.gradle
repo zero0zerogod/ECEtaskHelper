@@ -33,7 +33,7 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
 
 
-    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+    implementation 'org.mariadb.jdbc:mariadb-java-client'
 
     // JWT
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
@@ -42,6 +42,7 @@ dependencies {
 
     // Hibernate5Module
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate5'
+    implementation 'org.jboss.logging:jboss-logging:3.5.0.Final'
 
     // Jsoup library
     implementation 'org.jsoup:jsoup:1.15.3' // Jsoup 라이브러리

@@ -71,3 +71,13 @@
 .toggle-button:hover {
     filter: brightness(0.9);
 }
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.new-badge {
+    animation: blink 2s linear infinite;
+}

@@ -54,7 +54,7 @@ function NavBar({ isOpen, toggleNavBar }) {
                 <li className="navbar-item">
                     <Link to="/file" className="navbar-link">
                         <FaFileAlt className="navbar-icon" />
-                        <span className="navbar-text">파일</span>
+                        <span className="navbar-text">소스</span>
                     </Link>
                 </li>
                 <li className="navbar-item">

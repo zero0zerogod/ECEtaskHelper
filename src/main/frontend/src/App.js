@@ -40,7 +40,7 @@ function App() {
                             <Route path="/" element={<HomePage />} />
                             <Route path="/home" element={<HomePage />} />
                             <Route path="/schedule" element={<PrivateRoute element={<SchedulePage />} />} />
-                            <Route path="/file" element={<FilePage />} />
+                            <Route path="/file" element={<PrivateRoute element={<FilePage />} />} />
                             <Route path="/subjects" element={<SubjectPage />} />
                             <Route path="/about" element={<AboutPage />} />
                             <Route path="/oauth/redirected/kakao" element={<HomePage />} />
