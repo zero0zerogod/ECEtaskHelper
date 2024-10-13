@@ -95,12 +95,24 @@ tasks.register('installReact', Exec) {
     workingDir "$frontendDir"
     inputs.dir "$frontendDir"
     group = BasePlugin.BUILD_GROUP
-    if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
-        commandLine "npm.cmd", "audit", "fix"
-        commandLine 'npm.cmd', 'install'
+    def osName = System.getProperty('os.name').toLowerCase(Locale.ROOT)
 
+    if (osName.contains('windows')) {
+        commandLine 'npm.cmd', 'audit', 'fix'
     } else {
-        commandLine "npm", "audit", "fix" commandLine 'npm'
+        commandLine 'npm', 'audit', 'fix'
+    }
+
+    doLast {
+        if (osName.contains('windows')) {
+            exec {
+                commandLine 'npm.cmd', 'install'
+            }
+        } else {
+            exec {
+                commandLine 'npm', 'install'
+            }
+        }
     }
 }
 
