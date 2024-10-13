@@ -4,14 +4,15 @@ import React, { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import './App.css';
-import HomePage from './pages/HomePage/HomePage';
-import SchedulePage from './pages/SchedulePage/SchedulePage';
-import SubjectInfoPage from "./pages/SubjectInfoPage/SubjectInfoPage";
-import AboutPage from './pages/AboutPage/AboutPage';
-import LoginPage from './pages/LoginPage/LoginPage';
+import HomePage from './pages/home/HomePage';
+import SchedulePage from './pages/schedule/schedulePage';
+import SubjectPage from "./pages/subject/subjectPage";
+import AboutPage from './pages/about/aboutPage';
+import LoginPage from './pages/login/loginPage';
 import NavBar from './components/NavBar';
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
+import FilePage from "./pages/file/filePage";
 
 function App() {
     // 배포 환경에서 console.log, console.warn 지우기
@@ -39,7 +40,8 @@ function App() {
                             <Route path="/" element={<HomePage />} />
                             <Route path="/home" element={<HomePage />} />
                             <Route path="/schedule" element={<PrivateRoute element={<SchedulePage />} />} />
-                            <Route path="/subjectInfo" element={<SubjectInfoPage />} />
+                            <Route path="/file" element={<PrivateRoute element={<FilePage />} />} />
+                            <Route path="/subjects" element={<SubjectPage />} />
                             <Route path="/about" element={<AboutPage />} />
                             <Route path="/oauth/redirected/kakao" element={<HomePage />} />
                             <Route path="/oauth/redirected/naver" element={<HomePage />} />

@@ -1,0 +1,40 @@
+/* FileExplorer.css */
+.file-explorer {
+    width: 80%;
+    margin: 20px auto;
+}
+
+.file-explorer table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.file-explorer th, .file-explorer td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.file-explorer th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.file-explorer tr:hover {
+    background-color: #f5f5f5;
+}
+
+.file-explorer .download-button {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.file-explorer .download-button:hover {
+    background-color: #45a049;
+}

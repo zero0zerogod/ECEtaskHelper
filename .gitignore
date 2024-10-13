@@ -38,3 +38,6 @@ out/
 
 # 환경변수
 .env
+
+# Ignore Google Drive credentials file
+src/main/resources/project1-430217-61fd65791f50.json

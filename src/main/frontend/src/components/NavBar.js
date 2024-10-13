@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import './NavBar.css';
-import { FaHome, FaCalendarAlt, FaBook, FaInfoCircle, FaUser } from 'react-icons/fa';
+import {FaHome, FaCalendarAlt, FaBook, FaInfoCircle, FaUser, FaFileAlt} from 'react-icons/fa';
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import { GiHamburgerMenu } from "react-icons/gi";
 
@@ -35,7 +35,7 @@ function NavBar({ isOpen, toggleNavBar }) {
                     ) : (
                         <Link to="/login" className="navbar-link">
                             <FaUser className="navbar-icon" />
-                            <span className="navbar-text">로그인하세요</span>
+                            <span className="navbar-text">로그인</span>
                         </Link>
                     )}
                 </li>
@@ -52,7 +52,13 @@ function NavBar({ isOpen, toggleNavBar }) {
                     </Link>
                 </li>
                 <li className="navbar-item">
-                    <Link to="/subjectInfo" className="navbar-link">
+                    <Link to="/file" className="navbar-link">
+                        <FaFileAlt className="navbar-icon" />
+                        <span className="navbar-text">소스</span>
+                    </Link>
+                </li>
+                <li className="navbar-item">
+                    <Link to="/subjects" className="navbar-link">
                         <FaBook className="navbar-icon" />
                         <span className="navbar-text">개설과목정보</span>
                     </Link>
